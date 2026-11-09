@@ -2945,6 +2945,12 @@ static void core_anal_bytes(RCore *core, const ut8 *buf, int len, int nops, int 
 				pj_end (pj);
 			}
 
+            if (hint && hint->stackframe != 0) {
+                pj_kn (pj, "stackframesize", hint->stackframe);
+            }
+            if (op.stackptr != 0) {
+                pj_kn (pj, "stackptr", op.stackptr);
+            }
 			pj_ks (pj, "mnemonic", mnem);
 			if (smart_mask) {
 				char *maskstr = r_core_cmd_strf (core, "aobm@0x%08"PFMT64x, op.addr);
